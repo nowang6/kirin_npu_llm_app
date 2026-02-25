@@ -45,10 +45,11 @@ export struct MainPage{
       return
     }
     this.answerText = ""
-    this.messages.push({role: 'user', context: this.inputValue})
-    this.listScroller.scrollEdge(Edge.Bottom)
-    this.replyMessage()
+    let toSend = this.inputValue
+    this.messages.push({role: 'user', context: toSend})
     this.inputValue = ""
+    this.listScroller.scrollEdge(Edge.Bottom)
+    this.replyMessage(toSend)
   }
 
   private registerNativeCallback(){
@@ -70,11 +71,10 @@ export struct MainPage{
     });
   }
 
-  async replyMessage(){
+  async replyMessage(userPrompt: string) {
     this.messages.push({role: 'assistant', context: "Waiting for response......."})
-    let reply = "";
     this.registerNativeCallback();
-    testNapi.modelinfer(this.inputValue)
+    testNapi.modelinfer(userPrompt)
   }
 
   build() {

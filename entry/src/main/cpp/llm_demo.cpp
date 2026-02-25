@@ -42,11 +42,23 @@ LLMEngineProcessParam param;
 LLMEngine_Context* g_LLMEngineContext = nullptr;
 LLMEngine_Executor* g_LLMEngineExecutor = nullptr;
 
+/** Qwen3 ChatML 单轮对话模板（无 tools）：默认 system + user + assistant 前缀，启用 thinking */
+static std::string FormatPromptWithChatTemplate(const std::string& userInput)
+{
+    std::string out;
+    out += "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n";
+    out += "<|im_start|>user\n";
+    out += userInput;
+    out += "<|im_end|>\n";
+    out += "<|im_start|>assistant\n";
+    out += "<think>\n\n</think>\n\n";
+    return out;
+}
 
 static void InitParam()
 {
-    param.contextJsonPath = "/data/storage/el2/base/haps/entry/files/context.json";
-    param.executorJsonPath = "/data/storage/el2/base/haps/entry/files/executor.json";
+    param.contextJsonPath = "/data/storage/el2/base/files/context.json";
+    param.executorJsonPath = "/data/storage/el2/base/files/executor.json";
     param.isAsync = true;
     param.prompt = "";
 }
@@ -140,8 +152,9 @@ static bool LLMEngineGenerateSync(LLMEngine_Context* llmEngineContext,
                                   LLMEngine_Executor* llmEngineExecutor, const std::string& llm_engine_prompt)
 {
     LLMEngine_Status ret;
+    std::string formatted = FormatPromptWithChatTemplate(llm_engine_prompt);
 	LLMEngine_Prompt* mllmPrompt = LLMEngine_Prompt_Create();
-	ret = LLMEngine_Prompt_SetText(mllmPrompt, llm_engine_prompt.c_str());
+	ret = LLMEngine_Prompt_SetText(mllmPrompt, formatted.c_str());
 	if (ret != LLMEngine_SUCCESS)
 	{
 		OH_LOG_ERROR(LOG_APP, "LLMEngine_Prompt_SetTokenIds failed.");
@@ -387,10 +400,11 @@ static bool LLMEngineGenerateAsync(LLMEngine_Context* llmEngineContext,
     g_LLMEngineIsFirstToken = true;
     g_LLMEngineWaitFlag = true;
 
-	// 创建prompt
+	// 创建prompt（使用 Qwen ChatML 对话模板格式化）
+	std::string formatted = FormatPromptWithChatTemplate(llm_engine_prompt);
 	LLMEngine_Prompt* mllmPrompt = LLMEngine_Prompt_Create();
 
-	ret = LLMEngine_Prompt_SetText(mllmPrompt, llm_engine_prompt.c_str());
+	ret = LLMEngine_Prompt_SetText(mllmPrompt, formatted.c_str());
 	if (ret != LLMEngine_SUCCESS)
 	{
 		OH_LOG_ERROR(LOG_APP, "LLMEngine_Prompt_SetTokenIds failed.");
