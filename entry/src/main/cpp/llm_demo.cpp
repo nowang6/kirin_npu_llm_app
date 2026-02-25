@@ -42,7 +42,7 @@ LLMEngineProcessParam param;
 LLMEngine_Context* g_LLMEngineContext = nullptr;
 LLMEngine_Executor* g_LLMEngineExecutor = nullptr;
 
-/** Qwen3 ChatML 单轮对话模板（无 tools）：默认 system + user + assistant 前缀，启用 thinking */
+/** Qwen ChatML 单轮对话模板：system + user + assistant 前缀，无 tools */
 static std::string FormatPromptWithChatTemplate(const std::string& userInput)
 {
     std::string out;
@@ -51,7 +51,6 @@ static std::string FormatPromptWithChatTemplate(const std::string& userInput)
     out += userInput;
     out += "<|im_end|>\n";
     out += "<|im_start|>assistant\n";
-    out += "<think>\n\n</think>\n\n";
     return out;
 }
 
