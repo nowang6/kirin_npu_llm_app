@@ -70,3 +70,22 @@
     }
 }
 ```
+
+# 部署
+```sh
+hdc file send executor.json /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+hdc file send context.json /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+hdc file send model_64_2048.embedding_dequant_scale /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+hdc file send model_64_2048.embedding_weights /data/app/el2/100/base/com.huawei.cannkit.llmengine/files
+
+hdc file send omc_out.omc /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+hdc file send SubGraph_0.weight /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+hdc file send tokenizer.json /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
+
+```
+
