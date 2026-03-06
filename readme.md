@@ -1,4 +1,26 @@
+## context.json
+```json
+{
+    "version": 1,
+    "engine_type": "autoregressive",
+    "generate_options": {
+        "callback_freq": 2,
+        "max_gen_tokens": 600,
+        "stop_sequence": ["<|im_end|>"],
+        "init_token_len": 0
+    },
+    "sampler": {
+        "do_sample": true,
+        "seed": 99,
+        "top-k": 16,
+        "top-p": 0.95,
+        "temperature": 0.6,
+        "repetition_penalty": 1.2
+    }
+}
+```
 
+##
 ### Qwen3 1.7B
 ```json
 {
@@ -71,7 +93,7 @@
 }
 ```
 
-# 部署
+## 部署
 ```sh
 hdc file send executor.json /data/app/el2/100/base/com.huawei.cannkit.llmengine/files/
 
