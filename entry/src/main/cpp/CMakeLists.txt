@@ -19,8 +19,13 @@ add_library(hiai_llm_engine SHARED IMPORTED)
 set_target_properties(hiai_llm_engine PROPERTIES IMPORTED_LOCATION
     ${NATIVERENDER_ROOT_PATH}/lib64/libhiai_llm_engine.so)
 
+add_library(neural_network_runtime SHARED IMPORTED)
+set_target_properties(neural_network_runtime PROPERTIES IMPORTED_LOCATION
+    ${NATIVERENDER_ROOT_PATH}/lib64/libneural_network_runtime.so)
+
 add_library(entry SHARED llm_demo.cpp)
 target_link_libraries(entry PUBLIC libace_napi.z.so
     libhilog_ndk.z.so
     librawfile.z.so
-    hiai_llm_engine)
+    hiai_llm_engine
+    neural_network_runtime)
