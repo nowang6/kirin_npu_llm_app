@@ -20,7 +20,7 @@
 }
 ```
 
-## execute.json
+## executor.json
 ### Qwen3 1.7B
 ```json
 {
