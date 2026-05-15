@@ -63,8 +63,8 @@
     "version": 1,
     "engine_type": "autoregressive",
     "llm_config" : {
-        "bos_token_id": 151643,
-        "eos_token_id": 151643,
+        "bos_token_id": 151645,
+        "eos_token_id": 151645,
         "kv_cache_max_len": 2048,
         "sliding_window_len": 0,
         "max_position_embeddings": 32768,
@@ -77,7 +77,7 @@
         "vocab_real_size": 151936,
         "use_output_pos": false,
         "max_io_tokens": 4096,
-        "hidden_size": 896,
+        "hidden_size": 1536,
         "embedding_weights": "model_64_2048.embedding_weights",
         "embedding_dequant_scale": "model_64_2048.embedding_dequant_scale",
         "embedding_input_type": "int8"
