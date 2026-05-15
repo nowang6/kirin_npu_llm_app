@@ -57,7 +57,7 @@
 }
 ```
 
-### Qwen2 0.5B
+### Qwen2 1.5B
 ```json
 {
     "version": 1,
@@ -69,8 +69,8 @@
         "sliding_window_len": 0,
         "max_position_embeddings": 32768,
         "num_attention_kv_heads": 2,
-        "num_attention_head_dims": 64,
-        "num_hidden_layers": 24,
+        "num_attention_head_dims": 128,
+        "num_hidden_layers": 28,
         "prefill_len": 64,
         "decode_len": 1,
         "vocab_size": 151936,
